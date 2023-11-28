@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Notification tester</title>
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="btn">Show Notification</button>
+        <script type="text/javascript" charset="utf-8">
+            var button = document.getElementById('btn');
+            button.addEventListener('click', () => {
+                Notification.requestPermission().then(perm => {
+                    if (perm === 'granted') {
+                        navigator.serviceWorker.register('service-worker.js').then(registration => {
+                            registration.showNotification('hii');
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
